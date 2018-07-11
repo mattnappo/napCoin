@@ -1,0 +1,2 @@
+# malikcoin
+Malik Coin!
