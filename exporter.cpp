@@ -9,28 +9,33 @@ using namespace rapidjson;
 using namespace std;
 
 string importer() {
-  ifstream t("blockchains/blockchain_1.json");
+  ifstream t("blockchains/blockchain_0.json");
   string RAW((istreambuf_iterator<char>(t)), istreambuf_iterator<char>());
   return RAW;
 }
 int main() {
   const string RAW_JSON = importer();
   cout << RAW_JSON << endl;
-  // 1. Parse a JSON string into DOM.
-  const char* json = RAW_JSON.c_str();
-  Document d;
-  d.Parse(json);
+  const char *json = RAW_JSON.c_str();
+  // const char *json = "{\"project\":\"rapidjson\",\"stars\":10}";
+  Document document;
+  document.Parse(json);
 
-  // 2. Modify it by DOM.
-  Value& s = d["stars"];
-  s.SetInt(s.GetInt() + 1);
+  Value &blocks = document["blocks"];
+  for (SizeType i = 0; i < blocks.Size(); i++){
+    CCLOG("{x=%f, y=%f}", blocks[i]["x"].GetDouble(), blocks[i]["y"].GetDouble());
+  }
 
-  // 3. Stringify the DOM
+  StringBuffer block_buffer;
+  Writer<StringBuffer> block_writer(block_buffer);
+  blocks.Accept(block_writer);
+  cout << "Block0: " << block_buffer.GetString() << endl;
+
+/*
   StringBuffer buffer;
   Writer<StringBuffer> writer(buffer);
-  d.Accept(writer);
-
-  // Output {"project":"rapidjson","stars":11}
-  std::cout << buffer.GetString() << std::endl;
+  document.Accept(writer);
+  cout << buffer.GetString() << endl;
   return 0;
+*/
 }

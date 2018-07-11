@@ -1,3 +1,5 @@
 *.dSYM
 .DS_STORE
 blockchain
+*.gch
+*.out
