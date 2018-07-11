@@ -48,7 +48,7 @@ private:
       ARGON2_DEFAULT_FLAGS
     };
     int rc = argon2i_ctx( &context );
-    if(ARGON2_OK != rc) {
+    if (ARGON2_OK != rc) {
       printf("Error: %s\n", argon2_error_message(rc));
       exit(1);
     }
@@ -121,21 +121,21 @@ public:
     head = NULL;
   }
   ~List() {
-    while(head != NULL) {
+    while (head != NULL) {
       Node *n = head->next;
       delete head;
       head = n;
     }
   }
   void append(Block *block) {
-    if(this->head == NULL) {
+    if (this->head == NULL) {
       this->head = new Node;
       this->head->block = block;
       this->head->next = NULL;
       return;
     }
     Node *current_node = this->head;
-    while(current_node->next != NULL) {
+    while (current_node->next != NULL) {
       current_node = current_node->next;
     }
     Node *new_node = new Node;
@@ -145,17 +145,28 @@ public:
   }
   void print_blocks() {
     Node *current_node = this->head;
-    while(current_node != NULL) {
+    while (current_node != NULL) {
       current_node->block->print_block(false);
       current_node = current_node->next;
     }
+  }
+  Block *get_block(int index, List *list) {
+    Node *temp_node = new Node;
+    int counter = 0;
+    while (temp_node->next != NULL) {
+      if (index == counter) {
+        break;
+      }
+      temp_node = temp_node->next;
+      ++counter;
+    }
+    return temp_node->block;
   }
 };
 
 class Blockchain {
 private:
   Block *head_block = new Block;
-  List *blocks = new List;
   Block *add_block(Block last_block) {
     Block *new_block = new Block;
     int index = last_block.index + 1;
@@ -164,6 +175,7 @@ private:
   }
 public:
   int blockchain_size;
+  List *blocks = new List;
   int build(int blockchain_size, bool show_blocks) {
     this->blockchain_size = blockchain_size;
     this->head_block->init(0, "HEAD", "NULL"); // being overwrited by list new block function
@@ -182,10 +194,23 @@ public:
     }
     return 0;
   }
+  /*
   int export_blockchain(string blockchain_name, bool print_chain) {
+    json blockchain;
+    blockchain["blocks"] = { };
+    for (int i = 0; i < this->blockchain_size; i++) {
+      blockchain["blocks"][i]["index"] = this->blocks->get_block(i, this->blocks);
+      // blockchain["blocks"][i]["timestamp"] =
+      // blockchain["blocks"][i]["data"] =
+      // blockchain["blocks"][i]["previous_block"] =
+      // blockchain["blocks"][i]["this_block"] =
+    }
 
+
+    cout << "JSON: " << blockchain << endl;
     return 0;
   }
+  */
   int import_blockchain(string blockchain_name, bool show_blocks) {
     string filename = "blockchains/" + blockchain_name + ".json";
     ifstream ifs(filename);
@@ -222,10 +247,11 @@ public:
 int main() {
   clock_t tStart = clock();
   Blockchain *blockchain = new Blockchain;
-  blockchain->build(20, false);
-  blockchain->export_blockchain("blockchain_10", true);
+  blockchain->build(3, false);
+  Block *block_two = blockchain->blocks->get_block(1, blockchain->blocks);
+  cout << block_two->print_block(true);
+  // blockchain->export_blockchain("blockchain_10", true);
   // blockchain->import_blockchain("blockchain_0", true);
-
 
 
   cout << "\033[0;32mBlockchain with \033[1;32m" << blockchain->blockchain_size << "\033[0;32m blocks built in ";
