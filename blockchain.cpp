@@ -3,27 +3,23 @@
 #include <string>
 #include <ctime>
 #include <sstream>
-#include <iomanip>
-#include <fstream>
 #include <time.h>
+#include <fstream>
+#include "nlohmann/json.hpp"
 // FOR ARGON
 #include "argon2/argon2.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
+using namespace std;
+using json = nlohmann::json;
+
 #define HASHLEN 32
 #define SALTLEN 16
 
-using namespace std;
-
 class Block {
 private:
-  string convert_int(int n) {
-    stringstream ss;
-    ss << n;
-    return ss.str();
-  }
   string hash_block() {
     string TO_HASH = to_string(this->index) + this->timestamp + this->data + this->previous_block + this->current_block;
     uint8_t hash1[HASHLEN];
@@ -180,32 +176,44 @@ public:
       if (show_blocks == true) {
         new_block->print_block(true);
       }
-      current_block = new_block;
       cout << "\033[1;32mBlock #"<< current_block->index;
       cout << "\033[0;32m has been added to the blockchain.\033[0m\n";
       current_block = new_block;
     }
     return 0;
   }
-  int export_blockchain() {
+  int export_blockchain(string blockchain_name, bool print_chain) {
 
-    // Block *current_block = this->head_block;
-    // for (int i = 0; i < blockchain_size; i++) {
-    //   Block *new_block = add_block(*current_block);
-    //   this->blocks->append(new_block);
-    //   if (show_blocks) {
-    //     new_block->print_block();
-    //     current_block = new_block;
-    //   }
-    //   current_block = new_block;
-    // }
+    return 0;
+  }
+  int import_blockchain(string blockchain_name, bool show_blocks) {
+    string filename = "blockchains/" + blockchain_name + ".json";
+    ifstream ifs(filename);
+    json blockchain = json::parse(ifs);
 
+    this->blockchain_size = blockchain["blocks"].size();
+    this->head_block->init(0, "HEAD", "NULL"); // being overwrited by list new block function
+    this->blocks->append(this->head_block);
 
-    ofstream file;
-    file.open("blockchains/test.txt");
-    file << "Writing this to a file.\n";
-    file.close();
-    cout << "done" << endl;
+    for (int i = 0; i < this->blockchain_size; i++) {
+      Block *new_block = new Block;
+      int _index = blockchain["blocks"][i]["index"];
+      string _data = blockchain["blocks"][i]["data"];
+      string _previous_block = blockchain["blocks"][i]["previous_block"];
+
+      if (this->head_block == NULL) {
+        this->head_block->init(_index, _data, _previous_block);
+        this->blocks->append(this->head_block);
+      } else {
+        new_block->init(_index, _data, _previous_block);
+        this->blocks->append(new_block);
+      }
+      if (show_blocks == true) {
+        new_block->print_block(true);
+      }
+      cout << "\033[1;32mBlock #"<< new_block->index;
+      cout << "\033[0;32m has been added to the blockchain.\033[0m\n";
+    }
     return 0;
   }
 
@@ -215,7 +223,10 @@ int main() {
   clock_t tStart = clock();
   Blockchain *blockchain = new Blockchain;
   blockchain->build(20, false);
-  // blockchain->export_blockchain();
+  blockchain->export_blockchain("blockchain_10", true);
+  // blockchain->import_blockchain("blockchain_0", true);
+
+
 
   cout << "\033[0;32mBlockchain with \033[1;32m" << blockchain->blockchain_size << "\033[0;32m blocks built in ";
   printf("\033[1;32m%.2f seconds.\033[0m\n", (double)(clock() - tStart)/CLOCKS_PER_SEC);

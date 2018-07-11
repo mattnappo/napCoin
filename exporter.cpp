@@ -8,8 +8,7 @@ using json = nlohmann::json;
 int main() {
   ifstream ifs("blockchains/blockchain_0.json");
   json blockchain = json::parse(ifs);
-  cout << "fial: " << blockchain << endl << endl;
-  cout << blockchain << endl;
-  cout << endl << endl << endl;
-  cout << blockchain["blocks"];
+  cout << "size: " << blockchain["blocks"].size() << endl << endl;
+  cout << blockchain["blocks"] << endl;
+  cout << endl << endl << blockchain["blocks"][0] << endl;
 }
