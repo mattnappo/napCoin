@@ -111,12 +111,13 @@ int print_block(bool spacing) {
 }
 };
 class List {
+private:
   struct Node {
     Block *block;
     Node *next;
   };
-  Node *head;
 public:
+  Node *head;
   List() {
     head = NULL;
   }
@@ -151,7 +152,7 @@ public:
     }
   }
   Block *get_block(int index, List *list) {
-    Node *temp_node = new Node;
+    Node *temp_node = list->head;
     int counter = 0;
     while (temp_node != NULL) {
       if (index == counter) {
@@ -179,7 +180,13 @@ public:
   int build(int blockchain_size, bool show_blocks) {
     this->blockchain_size = blockchain_size;
     this->head_block->init(0, "HEAD", "NULL"); // being overwrited by list new block function
+
     this->blocks->append(this->head_block);
+    this->blocks->head->block = this->head_block;
+
+    cout << "block:" << endl << endl;
+    this->head_block->print_block(true);
+    cout << endl << "end block" << endl;
 
     Block *current_block = this->head_block;
     for (int i = 0; i < blockchain_size; i++) {
@@ -194,23 +201,27 @@ public:
     }
     return 0;
   }
-  /*
+
   int export_blockchain(string blockchain_name, bool print_chain) {
     json blockchain;
     blockchain["blocks"] = { };
+    // blockchain["blocks"][0] = { };
+    // cout << blockchain["blocks"][0] << endl;
     for (int i = 0; i < this->blockchain_size; i++) {
-      blockchain["blocks"][i]["index"] = this->blocks->get_block(i, this->blocks);
-      // blockchain["blocks"][i]["timestamp"] =
-      // blockchain["blocks"][i]["data"] =
-      // blockchain["blocks"][i]["previous_block"] =
-      // blockchain["blocks"][i]["this_block"] =
+      blockchain["blocks"][i] = { };
+      Block *block = this->blocks->get_block(i, this->blocks);
+      blockchain["blocks"][i]["index"] = block->index;
+      blockchain["blocks"][i]["timestamp"] = block->timestamp;
+      blockchain["blocks"][i]["data"] = block->data;
+      blockchain["blocks"][i]["previous_block"] = block->previous_block;
+      blockchain["blocks"][i]["this_block"] = block->current_block;
     }
-
-
-    cout << "JSON: " << blockchain << endl;
+    string filename = "blockchains/" + blockchain_name + ".json";
+    ofstream o(filename);
+    o << setw(4) << blockchain << endl;
     return 0;
   }
-  */
+
   int import_blockchain(string blockchain_name, bool show_blocks) {
     string filename = "blockchains/" + blockchain_name + ".json";
     ifstream ifs(filename);
@@ -247,11 +258,9 @@ public:
 int main() {
   clock_t tStart = clock();
   Blockchain *blockchain = new Blockchain;
-  blockchain->build(3, false);
-  Block *block_two = blockchain->blocks->get_block(1, blockchain->blocks);
-  cout << block_two->print_block(true);
-  // blockchain->export_blockchain("blockchain_10", true);
-  // blockchain->import_blockchain("blockchain_0", true);
+  blockchain->build(3, true);
+  //blockchain->export_blockchain("blockchain_10", true);
+  // blockchain->import_blockchain("blockchain_10", true);
 
 
   cout << "\033[0;32mBlockchain with \033[1;32m" << blockchain->blockchain_size << "\033[0;32m blocks built in ";
