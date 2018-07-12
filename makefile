@@ -151,8 +151,8 @@ clean:
 		cd kats/ &&  rm -f kat-* diff* run_* make_*
 blockchain: blockchain.cpp argon2/libargon2.a argon2/argon2.h
 	g++ -o blockchain blockchain.cpp argon2/libargon2.a -Isrc -Wall -g -std=c++11
-exporter: exporter.cpp nlohmann/json.hpp
-	g++ exporter.cpp nlohmann/json.hpp -Isrc -Wall -g -std=c++11
+exporter: exporter.cpp json/json.hpp
+	g++ exporter.cpp json/json.hpp -Isrc -Wall -g -std=c++11
 	mv a.out exporter
 dist:
 		cd ..; \

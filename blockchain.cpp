@@ -5,7 +5,7 @@
 #include <sstream>
 #include <time.h>
 #include <fstream>
-#include "nlohmann/json.hpp"
+#include "json/json.hpp"
 // FOR ARGON
 #include "argon2/argon2.h"
 #include <stdio.h>
@@ -153,12 +153,12 @@ public:
   Block *get_block(int index, List *list) {
     Node *temp_node = new Node;
     int counter = 0;
-    while (temp_node->next != NULL) {
+    while (temp_node != NULL) {
       if (index == counter) {
         break;
       }
       temp_node = temp_node->next;
-      ++counter;
+      counter++;
     }
     return temp_node->block;
   }
