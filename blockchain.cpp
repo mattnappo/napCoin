@@ -202,7 +202,7 @@ public:
     return 0;
   }
 
-  int export_blockchain(string blockchain_name, bool print_chain) {
+  int export_blockchain(string blockchain_name) {
     json blockchain;
     blockchain["blocks"] = { };
     // blockchain["blocks"][0] = { };
@@ -259,8 +259,8 @@ int main() {
   clock_t tStart = clock();
   Blockchain *blockchain = new Blockchain;
   blockchain->build(3, true);
-  //blockchain->export_blockchain("blockchain_10", true);
-  // blockchain->import_blockchain("blockchain_10", true);
+  // blockchain->export_blockchain("blockchain_0");
+  // blockchain->import_blockchain("blockchain_0", true);
 
 
   cout << "\033[0;32mBlockchain with \033[1;32m" << blockchain->blockchain_size << "\033[0;32m blocks built in ";

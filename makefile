@@ -150,10 +150,7 @@ clean:
 		cd src/blake2/ && rm -f *.o
 		cd kats/ &&  rm -f kat-* diff* run_* make_*
 blockchain: blockchain.cpp argon2/libargon2.a argon2/argon2.h
-	g++ -o blockchain blockchain.cpp argon2/libargon2.a -Isrc -Wall -g -std=c++11
-exporter: exporter.cpp json/json.hpp
-	g++ exporter.cpp json/json.hpp -Isrc -Wall -g -std=c++11
-	mv a.out exporter
+	g++ -o blockchain.o blockchain.cpp argon2/libargon2.a -Isrc -Wall -g -std=c++11
 dist:
 		cd ..; \
 		tar -c --exclude='.??*' -z -f $(DIST)-`date "+%Y%m%d"`.tgz $(DIST)/*
