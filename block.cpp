@@ -65,21 +65,27 @@ int block_index;
 string timestamp;
 string data;
 string previous_block;
-int Block::init(int index, string data, string previous_block) {
-  this->timestamp = get_timestamp();
+int Block::init(int index, string data, string previous_block,
+  bool from_import, string timestamp, string current_block) {
+  if (from_import) {
+    this->timestamp = timestamp;
+    this->current_block = current_block;
+  } else {
+    this->timestamp = get_timestamp();
+    this->current_block = hash_block();
+  }
   this->block_index = index;
   this->data = data;
   this->previous_block = previous_block;
-  this->current_block = hash_block();
   return 0;
 }
 int Block::print_block(bool spacing) {
   if (spacing) { cout << endl; }
-  cout << "This block: " << this->current_block << endl;
-  cout << "Index: " << this->block_index << endl;
-  cout << "Timestamp: " << this->timestamp << endl;
-  cout << "Data: " << this->data << endl;
   cout << "Previous block: " << this->previous_block << endl;
+  cout << "Index:          " << this->block_index << endl;
+  cout << "Timestamp:      " << this->timestamp << endl;
+  cout << "Data:           " << this->data << endl;
+  cout << "This block:     " << this->current_block << endl;
   if (spacing) { cout << endl; }
   return 0;
 }

@@ -24,15 +24,18 @@ int Blockchain::build(int blockchain_size, bool show_blocks) {
   this->blocks->append(this->head_block);
 
   this->head_block->print_block(true);
+  cout << "\033[1;32mBlock #"<< this->head_block->block_index;
+  cout << "\033[0;32m has been added to the blockchain.\033[0m\n";
+
   Block *current_block = this->head_block;
-  for (int i = 0; i < blockchain_size; i++) {
+  for (int i = 0; i < blockchain_size - 1; i++) {
 
     Block *new_block = add_block(*current_block);
     this->blocks->append(new_block);
     if (show_blocks) {
       new_block->print_block(true);
     }
-    cout << "\033[1;32mBlock #"<< current_block->block_index;
+    cout << "\033[1;32mBlock #"<< new_block->block_index;
     cout << "\033[0;32m has been added to the blockchain.\033[0m\n";
     current_block = new_block;
   }
@@ -75,9 +78,11 @@ int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
     int _index = blockchain["blocks"][i]["block_index"];
     string _data = blockchain["blocks"][i]["data"];
     string _previous_block = blockchain["blocks"][i]["previous_block"];
+    string _timestamp = blockchain["blocks"][i]["timestamp"];
+    string _this_block = blockchain["blocks"][i]["this_block"];
 
     if (this->head_block == NULL) {
-      this->head_block->init(_index, _data, _previous_block);
+      this->head_block->init(_index, _data, _previous_block, true, _timestamp, _this_block);
       this->blocks->append(this->head_block);
     } else {
       new_block->init(_index, _data, _previous_block);

@@ -14,7 +14,8 @@ public:
   string timestamp; // Timestamp of the current block
 	string data; // Data of the current block
   string previous_block; // Hash of the previous block
-  int init(int index, string data, string previous_block); //
+  int init(int index, string data, string previous_block,
+    bool from_import = false, string timestamp = "", string current_block = ""); // Initialize a block
   int print_block(bool spacing); // Print the contents of the current block
 };
 
