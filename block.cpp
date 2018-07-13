@@ -1,10 +1,9 @@
-#include <iostream>
-
 #include "blockchain.h"
 #include "json/json.hpp"
 #include "argon2/argon2.h"
-
+#include <iostream>
 using namespace std;
+
 #define HASHLEN 32
 #define SALTLEN 16
 
