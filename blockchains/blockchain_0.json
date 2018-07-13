@@ -1,39 +1,39 @@
 {
     "blocks": [
         {
+            "block_index": 0,
             "data": "HEAD",
-            "index": 0,
             "previous_block": "NULL",
-            "this_block": "d54b1b1f029864e2e502e8b8e0cf746e86cd233ac107f6856faf4b7344c89c33",
-            "timestamp": "2018-7-13 @ 9:21:29"
+            "this_block": "7674da19a4058cdcfaf2256194d1a0f28c86ceb6789b366c5c2a2231862c6f18",
+            "timestamp": "2018-7-13 @ 10:22:41"
         },
         {
+            "block_index": 1,
             "data": "This is block #1",
-            "index": 1,
-            "previous_block": "d54b1b1f029864e2e502e8b8e0cf746e86cd233ac107f6856faf4b7344c89c33",
-            "this_block": "e1ee63212e29b31fecc851ddbd7c12d7f39611756f7a3a15ee3db42ec76f8178",
-            "timestamp": "2018-7-13 @ 9:21:29"
+            "previous_block": "7674da19a4058cdcfaf2256194d1a0f28c86ceb6789b366c5c2a2231862c6f18",
+            "this_block": "2f81b7fdad341d65b76c4f50a82db0712e5fd31017583fd70442bf8d61f8a3bc",
+            "timestamp": "2018-7-13 @ 10:22:41"
         },
         {
+            "block_index": 2,
             "data": "This is block #2",
-            "index": 2,
-            "previous_block": "e1ee63212e29b31fecc851ddbd7c12d7f39611756f7a3a15ee3db42ec76f8178",
-            "this_block": "45f43284fb4bfea9618520aee3db918f2510143d1f76c417b4607be1a2ac3fce",
-            "timestamp": "2018-7-13 @ 9:21:30"
+            "previous_block": "2f81b7fdad341d65b76c4f50a82db0712e5fd31017583fd70442bf8d61f8a3bc",
+            "this_block": "1694798b17c2ba85c2fcbedbcbe75a24356d8edd6758011468983708239b8dcd",
+            "timestamp": "2018-7-13 @ 10:22:41"
         },
         {
+            "block_index": 3,
             "data": "This is block #3",
-            "index": 3,
-            "previous_block": "45f43284fb4bfea9618520aee3db918f2510143d1f76c417b4607be1a2ac3fce",
-            "this_block": "ee7a3efafc8223544c597c0f992bdf6cb8c244c7807c9b77ca875c2fe7cfa4c7",
-            "timestamp": "2018-7-13 @ 9:21:30"
+            "previous_block": "1694798b17c2ba85c2fcbedbcbe75a24356d8edd6758011468983708239b8dcd",
+            "this_block": "43c4f76138865b8bed5c722fa17043a7cff438c22026244e912da5c3a9a878ef",
+            "timestamp": "2018-7-13 @ 10:22:41"
         },
         {
+            "block_index": 4,
             "data": "This is block #4",
-            "index": 4,
-            "previous_block": "ee7a3efafc8223544c597c0f992bdf6cb8c244c7807c9b77ca875c2fe7cfa4c7",
-            "this_block": "7cd59b134a2e03c75b07e28e0e204350ff53c0660fff3ad193cbe4126fe8f3ab",
-            "timestamp": "2018-7-13 @ 9:21:30"
+            "previous_block": "43c4f76138865b8bed5c722fa17043a7cff438c22026244e912da5c3a9a878ef",
+            "this_block": "948c9d64194fcfbe8f34370209ac40443d60cfe66cff33d4d6142e101f741518",
+            "timestamp": "2018-7-13 @ 10:22:41"
         }
     ]
 }

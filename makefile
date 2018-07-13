@@ -149,8 +149,8 @@ clean:
 		cd src/ && rm -f *.o
 		cd src/blake2/ && rm -f *.o
 		cd kats/ &&  rm -f kat-* diff* run_* make_*
-blockchain: blockchain.cpp block.cpp blockchain.h argon2/libargon2.a argon2/argon2.h
-	g++ blockchain.cpp block.cpp blockchain.h argon2/libargon2.a -Isrc -Wall -g -std=c++11
+blockchain: main.cpp block.cpp list.cpp blockchain.h argon2/libargon2.a argon2/argon2.h
+	g++ main.cpp block.cpp list.cpp blockchain.cpp blockchain.h argon2/libargon2.a -Isrc -Wall -g -std=c++11
 	mv a.out blockchain.o
 dist:
 		cd ..; \
