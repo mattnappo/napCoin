@@ -149,8 +149,9 @@ clean:
 		cd src/ && rm -f *.o
 		cd src/blake2/ && rm -f *.o
 		cd kats/ &&  rm -f kat-* diff* run_* make_*
-blockchain: blockchain.cpp argon2/libargon2.a argon2/argon2.h
-	g++ -o blockchain.o blockchain.cpp argon2/libargon2.a -Isrc -Wall -g -std=c++11
+blockchain: blockchain.cpp block.cpp blockchain.h argon2/libargon2.a argon2/argon2.h
+	g++ blockchain.cpp block.cpp blockchain.h argon2/libargon2.a -Isrc -Wall -g -std=c++11
+	mv a.out blockchain.o
 dist:
 		cd ..; \
 		tar -c --exclude='.??*' -z -f $(DIST)-`date "+%Y%m%d"`.tgz $(DIST)/*
