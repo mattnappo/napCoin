@@ -6,16 +6,16 @@ using namespace std;
 
 class Block {
 private:
-  string hash_block();
-  string get_timestamp();
+  string hash_block(); // Method that hashes the contents of each block
+  string get_timestamp(); // Method that returns a string of the current date and time
 public:
-  string current_block;
-  int block_index;
-  string timestamp;
-	string data;
-  string previous_block;
-  int init(int index, string data, string previous_block);
-  int print_block(bool spacing);
+  string current_block; // Hash of the current block
+  int block_index; // Index of the current block
+  string timestamp; // Timestamp of the current block
+	string data; // Data of the current block
+  string previous_block; // Hash of the previous block
+  int init(int index, string data, string previous_block); //
+  int print_block(bool spacing); // Print the contents of the current block
 };
 
 struct Node {

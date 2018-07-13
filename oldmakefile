@@ -1,0 +1,11 @@
+SRC = block.cpp list.cpp blockchain.cpp blockchain.h
+CGLAGS = -g -std=c++11
+ARGON = argon2/libargon2.a
+
+blockchain: main.cpp $(SRC_FILES)
+	g++ main.cpp $(SRC_FILES) $(ARGON) $(CFLAGS)
+	mv a.out blockchain.o
+clean:
+	rm -f *.gch
+	rm -f *.o
+	rm -rf a.out.dSYM
