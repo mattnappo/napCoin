@@ -1,6 +1,11 @@
-language: cpp
-compiler: g++
-script:
- - make argon2
- - make json
- - make blockchain
+matrix:
+  include:
+    - language: cpp
+      compiler: g++
+      script:
+        - make blockchain
+        - make json
+    - language: c
+      compiler: gcc
+      script:
+        - make argon2

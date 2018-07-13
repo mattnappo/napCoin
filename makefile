@@ -1,5 +1,5 @@
 SRC = block.cpp list.cpp blockchain.cpp blockchain.h
-CFLAGS = -g
+CFLAGS = -g -Wall -g
 ARGON = argon2/libargon2.a
 CC = g++
 B_TARGET = blockchain.o
