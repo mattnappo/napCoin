@@ -23,25 +23,26 @@ struct Node {
   Node *next;
 };
 
-class List {
+class List { // This is used to store the blocks
 public:
   Node *head;
   List();
-  ~List();
-  void append(Block *block);
-  Block *get_block(int index, List *list);
+  ~List(); // Delete each item in the list
+  void append(Block *block); // Append a block to the list
+  Block *get_block(int index, List *list); // Get block by index (inefficient)
 };
 
 class Blockchain {
 private:
-  clock_t tStart = clock();
+  clock_t tStart = clock(); // Used to calculate the build time of the blocks
   Block *head_block = new Block;
-  Block *add_block(Block last_block);
+  Block *add_block(Block last_block); // Add a block to the list (and the blockchain itself)
 public:
-  int blockchain_size;
-  List *blocks = new List;
-  int build(int blockchain_size, bool show_blocks);
-  int export_blockchain(string blockchain_name);
-  int import_blockchain(string blockchain_name, bool show_blocks);
+  int blockchain_size; // amount of blocks in the chain
+  List *blocks = new List; // List of blocks in this chain
+  int build(int blockchain_size, bool show_blocks); // Build blocks
+  int export_blockchain(string blockchain_name); // Export blockchain to json file
+  int import_blockchain(string blockchain_name, bool show_blocks); // Import blockchain from json file
 };
+
 #endif
