@@ -3,12 +3,13 @@
 #include "argon2/argon2.h"
 #include <iostream>
 using namespace std;
+// THERE IS SOME SORT OF PROBLEM WITH WHERE THE HASHES GO
 
 #define HASHLEN 32
 #define SALTLEN 16
 
 string Block::hash_block() {
-  string TO_HASH = to_string(this->block_index) + this->timestamp + this->data + this->previous_block + this->current_block;
+  string TO_HASH = to_string(this->block_index) + this->timestamp + this->data + this->previous_block /* + this->current_block */;
   uint8_t hash1[HASHLEN];
   uint8_t hash2[HASHLEN];
   uint8_t salt[SALTLEN];

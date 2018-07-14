@@ -63,7 +63,13 @@ int Blockchain::export_blockchain(string blockchain_name) {
   cout << "\033[0;32mCurrent blockchain exported to \033[1;32m" << filename << ".\033[0m" << endl;
   return 0;
 }
+int Blockchain::validate(Block block_1, Block block_2) {
+  // 1. Check if indexs match up
 
+  // 3. Check if  block1.hash == hash of block2.previous
+
+  // 2. Hash block1 as HASH. check if HASH == block1.this_block. check if HASH == block2.previous
+}
 int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
   string filename = "blockchains/" + blockchain_name + ".json";
   ifstream ifs(filename);

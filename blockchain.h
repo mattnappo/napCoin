@@ -38,6 +38,7 @@ private:
   clock_t tStart = clock(); // Used to calculate the build time of the blocks
   Block *head_block = new Block;
   Block *add_block(Block last_block); // Add a block to the list (and the blockchain itself)
+  int validate(Block block_1, Block block_2); // Validate two blocks in the chain
 public:
   int blockchain_size; // amount of blocks in the chain
   List *blocks = new List; // List of blocks in this chain
