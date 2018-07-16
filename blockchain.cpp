@@ -20,7 +20,7 @@ int blockchain_size;
 List *blocks = new List;
 int Blockchain::build(int blockchain_size, bool show_blocks) {
   this->blockchain_size = blockchain_size;
-  this->head_block->init(0, "HEAD", "NULL"); // being overwrited by list new block function
+  this->head_block->init(0, "HEAD", "NULL");
   this->blocks->append(this->head_block);
 
   this->head_block->print_block(true);
@@ -53,7 +53,7 @@ int Blockchain::export_blockchain(string blockchain_name) {
     blockchain["blocks"][i]["block_index"] = block->block_index;
     blockchain["blocks"][i]["timestamp"] = block->timestamp;
     blockchain["blocks"][i]["data"] = block->data;
-    blockchain["blocks"][i]["previous_block"] = block->previous_block;
+    blockchain["blocks"][i]["previous_block"] = block->previous_block; // block->previous_block;
     blockchain["blocks"][i]["this_block"] = block->current_block;
   }
   string filename = "blockchains/" + blockchain_name + ".json";
@@ -69,6 +69,7 @@ int Blockchain::validate(Block block_1, Block block_2) {
   // 3. Check if  block1.hash == hash of block2.previous
 
   // 2. Hash block1 as HASH. check if HASH == block1.this_block. check if HASH == block2.previous
+  return 0;
 }
 int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
   string filename = "blockchains/" + blockchain_name + ".json";

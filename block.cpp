@@ -8,8 +8,8 @@ using namespace std;
 #define HASHLEN 32
 #define SALTLEN 16
 
-string Block::hash_block() {
-  string TO_HASH = to_string(this->block_index) + this->timestamp + this->data + this->previous_block /* + this->current_block */;
+string Block::hash_block(string contents) {
+  string TO_HASH = contents;
   uint8_t hash1[HASHLEN];
   uint8_t hash2[HASHLEN];
   uint8_t salt[SALTLEN];
@@ -66,18 +66,19 @@ int block_index;
 string timestamp;
 string data;
 string previous_block;
-int Block::init(int index, string data, string previous_block,
-  bool from_import, string timestamp, string current_block) {
+int Block::init(int index, string data, string previous_block, bool from_import, string timestamp, string current_block) {
+  this->block_index = index;
+  this->data = data;
+  this->previous_block = previous_block;
   if (from_import) {
     this->timestamp = timestamp;
     this->current_block = current_block;
   } else {
     this->timestamp = get_timestamp();
-    this->current_block = hash_block();
+    string contents = to_string(this->block_index) + this->timestamp + this->data + this->previous_block /* + this->current_block */;
+    this->current_block = hash_block(contents);
   }
-  this->block_index = index;
-  this->data = data;
-  this->previous_block = previous_block;
+
   return 0;
 }
 int Block::print_block(bool spacing) {

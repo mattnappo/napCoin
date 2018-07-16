@@ -16,7 +16,6 @@ void List::append(Block *block) {
     this->head = new Node;
     this->head->block = block;
     this->head->next = NULL;
-    return;
   }
   Node *current_node = this->head;
   while (current_node->next != NULL) {
