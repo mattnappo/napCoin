@@ -1,7 +1,7 @@
 SRC = block.cpp list.cpp blockchain.cpp hasher.cpp blockchain.h
 CFLAGS = -g -Wall
 ARGON = argon2/libargon2.a
-CC = g++
+CC = clang
 TARGET = blockchain.o
 STD = -std=c++11
 blockchain: main.cpp $(SRC) argon2/argon2.h
