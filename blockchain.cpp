@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <fstream>
-#include <unistd.h>
 
 using namespace std;
 using json = nlohmann::json;
@@ -20,17 +19,17 @@ Block *Blockchain::next_block(Block *last_block) {
   new_block->print_block(true);
   return new_block;
 }
-
+Block *Blockchain::genesis() {
+  Block *block = new Block;
+  block->init(0, "HEAD BLOCK", "NO PREVIOUS BLOCK");
+  return block;
+}
 int Blockchain::build(int blockchain_size, bool show_blocks) {
   this->blockchain_size = blockchain_size;
-  Block *new_head = new Block;
-  new_head->init(0, "HEAD BLOCK", "NO PREVIOUS BLOCK");
-  this->head_block = new_head;
-  // this->blocks->append(this->head_block);
-  this->blocks->head = new Node;
-  this->blocks->head->block = new_head;
 
-  Block *previous_block = this->head_block;
+  this->blocks->append(genesis());
+
+  Block *previous_block = this->blocks->get_block(0, this->blocks);
   for (int i = 0; i < blockchain_size; i++) {
     Block *block_to_add = next_block(previous_block);
     this->blocks->append(block_to_add);

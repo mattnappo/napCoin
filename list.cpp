@@ -1,9 +1,11 @@
 #include "blockchain.h"
+#include <iostream>
 
-Node *head;
 List::List() {
-  head = NULL;
+  this->head = NULL;
+  this->tail = NULL;
 }
+
 List::~List() {
   while (head != NULL) {
     Node *n = head->next;
@@ -11,21 +13,21 @@ List::~List() {
     head = n;
   }
 }
+
 void List::append(Block *block) {
-  if (this->head == NULL) {
-    this->head = new Node;
-    this->head->block = block;
-    this->head->next = NULL;
+  Node *temp = new Node;
+  temp->block = block;
+  temp->next = NULL;
+  if (head == NULL) {
+    this->head = temp;
+    this->tail = temp;
+    temp = NULL;
+  } else {
+    this->tail->next = temp;
+    this->tail = temp;
   }
-  Node *current_node = this->head;
-  while (current_node->next != NULL) {
-    current_node = current_node->next;
-  }
-  Node *new_node = new Node;
-  new_node->block = block;
-  new_node->next = NULL;
-  current_node->next = new_node;
 }
+
 Block *List::get_block(int index, List *list) {
   Node *temp_node = list->head;
   int counter = 0;

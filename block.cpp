@@ -17,10 +17,7 @@ string Block::get_timestamp() {
   string c_time = year + "-" + month + "-" + day + " @ " + hour + ":" + min + ":" + sec;
   return c_time;
 }
-string current_hash;
-string timestamp;
-string data;
-string previous_hash;
+
 int Block::init(int index, string data, string previous_hash, bool from_import, string timestamp, string current_hash) {
   this->index = index;
   this->data = data;

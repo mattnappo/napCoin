@@ -2,6 +2,7 @@
 #define BLOCKCHAIN_H
 
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -28,6 +29,7 @@ struct Node { // For the list class
 class List { // This is used to store the blocks
 public:
   Node *head;
+  Node *tail;
   List();
   ~List(); // Delete each item in the list
   void append(Block *block); // Append a block to the list
@@ -40,6 +42,7 @@ private:
   Block *head_block = new Block;
   Block *next_block(Block *last_block); // Add a block to the list (and the blockchain itself)
   int validate(Block block_1, Block block_2); // Validate two blocks in the chain
+  Block *genesis();
 public:
   int blockchain_size; // Amount of blocks in the chain
   List *blocks = new List; // List of blocks in this chain
