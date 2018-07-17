@@ -76,11 +76,11 @@ int Blockchain::check(Block block_1, Block block_2) {
 int Blockchain::validate() {
   cout << endl << "Starting validation process." << endl;
 
-  Block *block_1 =
+  Block *block_1 = new Block;
   for (int i = 0; i < blockchain_size; i++) {
 
   }
-  blockchain->validate();
+  // validate();
   return 0;
 }
 
@@ -107,5 +107,5 @@ int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
 
   cout << "\n\033[0;32mBlockchain with \033[1;32m" << this->blockchain_size - 1 << "\033[0;32m blocks imported in ";
   printf("\033[1;32m%.2f seconds.\033[0m\n", (double)(clock() - this->tStart)/CLOCKS_PER_SEC);
-  blockchain->validate();
+  validate();
 }
