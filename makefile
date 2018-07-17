@@ -1,4 +1,4 @@
-SRC = block.cpp list.cpp blockchain.cpp blockchain.h
+SRC = block.cpp list.cpp blockchain.cpp hasher.cpp blockchain.h
 CFLAGS = -g -Wall
 ARGON = argon2/libargon2.a
 CC = g++
