@@ -2,6 +2,7 @@
 #include "json/json.hpp"
 #include "argon2/argon2.h"
 #include <iostream>
+
 using namespace std;
 
 string Block::get_timestamp() {

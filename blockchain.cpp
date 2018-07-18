@@ -1,13 +1,10 @@
 #include "blockchain.h"
 #include "json/json.hpp"
-
 #include <iostream>
 #include <fstream>
 
 using namespace std;
 using json = nlohmann::json;
-
-clock_t tStart = clock();
 
 Block *Blockchain::next_block(Block *last_block) {
   int _index = last_block->index + 1;
@@ -114,7 +111,10 @@ int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
   printf("\033[1;32m%.2f seconds.\033[0m\n", (double)(clock() - this->tStart)/CLOCKS_PER_SEC);
   if (validate() == 0) {
     cout << "Valid blockchain." << endl;
+    return 0;
   } else {
     cout << "Invalid blockchain." << endl;
+    return 1;
   }
+  
 }
