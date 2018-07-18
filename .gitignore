@@ -3,3 +3,4 @@
 *.o
 *.gch
 *.out
+.vscode/

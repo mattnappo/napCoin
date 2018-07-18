@@ -28,6 +28,10 @@ Arguments:
 * ``string blockchain_name`` - Specifies the name of the file to read the blockchain from.
 * ``bool show_blocks`` - Specifies whether to display the contents of each newly-imported block to the console.
 
+### validate
+``validate`` validates the blocks of the current blockchain.
+Arguments: (None)
+
 ### print_blockchain
 ``print_blockchain`` prints the blockchain in its current state.
 Arguments: (None)
@@ -71,8 +75,17 @@ int main() {
 ## Building
 ``make blockchain`` builds ``blockchain.cpp`` as ``blockchain.o`` in the root directory.
 
-## Features to Add:
-* Command line interface
+## Finished Features:
+* Import function
+* Export function
 * Validation
-* Public-key cryptography
-* Networking validation nodes
+* More efficient linked list
+* Fixed security flaws
+* Lua blockchain for Minecraft (Sorta a meme)
+
+## Features to Add:
+* Transactions
+* Proof of work
+* Digital signatures
+* Networking
+* Command line interface

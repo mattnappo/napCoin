@@ -170,17 +170,18 @@ end
 
 function init_block(blockchain, _index, _timestamp, _data, _previous_hashh)
     block_name = "block_" .. _index
-    print(_previous_hashh)
     _previous_hashh = "asdh"
     contents = _timestamp .. _index .. _data .. _previous_hashh
     _hash = sha256(contents)
+    blockchain[block_name] = { }
+    blockchain[block_name]["hash"] = ""
+    blockchain[block_name]["index"] = ""
     blockchain[block_name]["hash"] = _hash
     blockchain[block_name]["index"] = _index
 end
 
-function create_head()
-    block = init_block(0, timestamp(), "HEAD BLOCK", "NONE")
-    require 'pl.pretty'.dump(block)
+function create_head(blockchain)
+    block = init_block(blockchain, 0, timestamp(), "HEAD BLOCK", "NONE")
     return block
 end
 
@@ -194,13 +195,25 @@ end
 print("How many blocks do you want?")
 blockchain_size = io.read("*n")
 
-local blockchain = { }
-create_head()
+blockchain = { }
+create_head(blockchain)
 
+current_block = blockchain["block_0"]
 for i = 0, blockchain_size, 1 do
-    init_block(blockchain, i, timestamp(), "I am block #" .. i, "rasd")
-    print("Block #" .. block_to_add["index"] .. "has been added to the blockchain.")
-    print("Hash: " .. block_to_add["hash"])
+    init_block(blockchain, i, timestamp(), "I am block #" .. i, "temp-salt")
+    if i == 1 then
+        current_block = blockchain["block_1"]
+    else current_block = blockchain["block_" .. i] end
+end
+for i = 0, blockchain_size, 1 do
+    print("Block #" .. i ..  " Hash: " .. current_block["hash"])
+    if i == 1 then
+        current_block = blockchain["block_1"]
+    else current_block = blockchain["block_" .. i] end
 end
 
-require 'pl.pretty'.dump(blockchain)
+function show_raw()
+    require 'pl.pretty'.dump(blockchain)
+end
+
+--show_raw()
