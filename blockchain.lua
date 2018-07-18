@@ -161,10 +161,15 @@ function sha256(msg)
         num2s(H[5], 4) .. num2s(H[6], 4) .. num2s(H[7], 4) .. num2s(H[8], 4))
 end
 
-function timestamp()
+function os_timestamp()
     time = os.time(os.date("!*t"))    
     temp = os.date("*t", time)
     format = temp["year"] .. "-" .. temp["month"] .. temp["day"] .. " @ " .. temp["hour"] .. ":" .. temp["min"] .. ":" .. temp["sec"]
+    return format
+end
+function mc_timestamp()
+    time = os.time()
+    format = textutils.formatTime(time, false)
     return format
 end
 
@@ -180,9 +185,12 @@ function init_block(blockchain, _index, _timestamp, _data, _previous_hashh)
     blockchain[block_name]["index"] = _index
 end
 
-function create_head(blockchain)
-    block = init_block(blockchain, 0, timestamp(), "HEAD BLOCK", "NONE")
-    return block
+function create_mc_head(blockchain)
+    init_block(blockchain, 0, mc_timestamp(), "HEAD BLOCK", "NONE")
+end
+
+function create_os_head(blockchain)
+    init_block(blockchain, 0, os_timestamp(), "HEAD BLOCK", "NONE")
 end
 
 function add_block(_blockchain, old_block)
@@ -192,28 +200,42 @@ function add_block(_blockchain, old_block)
     return init_block(_blockchain, _index, timestamp(), data, previous_hash)
 end
 
-print("How many blocks do you want?")
-blockchain_size = io.read("*n")
 
-blockchain = { }
-create_head(blockchain)
+function main(sys, show_raw)
+    blockchain = { }
+    if sys == "os" then
+        create_os_head(blockchain)
+    else
+        create_mc_head(blockchain)
+    end
+    blockchain_size = 0
+    if sys == "mc" then
+        blockchain_size = 50
+    elseif sys == "os" then
+        print("How many blocks do you want?")
+        io.flush()
+        blockchain_size = io.read("*n")
+    end
 
-current_block = blockchain["block_0"]
-for i = 0, blockchain_size, 1 do
-    init_block(blockchain, i, timestamp(), "I am block #" .. i, "temp-salt")
-    if i == 1 then
-        current_block = blockchain["block_1"]
-    else current_block = blockchain["block_" .. i] end
+    current_block = blockchain["block_0"]
+    for i = 0, blockchain_size, 1 do
+        if sys == "os" then
+            init_block(blockchain, i, os_timestamp(), "I am block #" .. i, "temp-salt")
+        else
+            init_block(blockchain, i, mc_timestamp(), "I am block #" .. i, "temp-salt")
+        end
+        if i == 1 then
+            current_block = blockchain["block_1"]
+        else current_block = blockchain["block_" .. i] end
+    end
+    for i = 0, blockchain_size, 1 do
+        print("Block #" .. i ..  " Hash: " .. current_block["hash"])
+        if i == 1 then
+            current_block = blockchain["block_1"]
+        else current_block = blockchain["block_" .. i] end
+    end
+    if show_raw == true then require 'pl.pretty'.dump(blockchain) end
 end
-for i = 0, blockchain_size, 1 do
-    print("Block #" .. i ..  " Hash: " .. current_block["hash"])
-    if i == 1 then
-        current_block = blockchain["block_1"]
-    else current_block = blockchain["block_" .. i] end
-end
 
-function show_raw()
-    require 'pl.pretty'.dump(blockchain)
-end
-
---show_raw()
+main("os", true)
+--main("mc", false)
