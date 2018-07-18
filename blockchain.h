@@ -6,11 +6,12 @@
 
 using namespace std;
 
+string hash_block(string contents); // Method that hashes the contents of each block
+
 class Block {
 private:
-  string hash_block(string contents); // Method that hashes the contents of each block
   string get_timestamp(); // Method that returns a string of the current date and time
-public:
+public:  
   string this_hash; // Hash of the current block
   int index; // Index of the current block
   string timestamp; // Timestamp of the current block
@@ -42,8 +43,7 @@ private:
   Block *head_block = new Block;
   Block *build_genesis();
   Block *next_block(Block *last_block); // Add a block to the list (and the blockchain itself)
-  int check(Block block_1, Block block_2); // Validate two blocks in the chain
-  int validate(); // Validate the entire blockchain
+  int validate(); // Validate the blockchain
   Block *genesis();
 public:
   int blockchain_size; // Amount of blocks in the chain

@@ -7,7 +7,7 @@
 #define SALTLEN 16
 using namespace std;
 
-string Block::hash_block(string contents) {
+string hash_block(string contents) {
   string TO_HASH = contents;
   uint8_t hash1[HASHLEN];
   uint8_t hash2[HASHLEN];

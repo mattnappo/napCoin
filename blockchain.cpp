@@ -64,23 +64,28 @@ int Blockchain::export_blockchain(string blockchain_name) {
   return 0;
 }
 
-int Blockchain::check(Block block_1, Block block_2) {
-  // 1. Check if indexs match up
-
-  // 3. Check if  block1.hash == hash of block2.previous
-
-  // 2. Hash block1 as HASH. check if HASH == block1.this_block. check if HASH == block2.previous
-  return 0;
-}
-
 int Blockchain::validate() {
-  cout << endl << "Starting validation process." << endl;
+  cout << endl << "\033[0;32mStarting validation process.\033[0m" << endl << endl;
 
-  Block *block_1 = new Block;
+  Block *block_1 = this->blocks->get_block(0, this->blocks);
+  // cout << block_1->index << endl;
+  Block *block_2 = this->blocks->get_block(block_1->index + 1, this->blocks);
+  // cout << block_2->index << endl;
   for (int i = 0; i < blockchain_size; i++) {
-
+    string contents = to_string(block_1->index) + block_1->timestamp + block_1->data + block_1->previous_hash;
+    if (block_1->this_hash == hash_block(contents) && 
+    block_1->this_hash == block_2->previous_hash && 
+    block_1->index + 1 == block_2->index ) {
+      block_2 = this->blocks->get_block(block_1->index + 1, this->blocks);
+      cout << "\033[0;32mValidated: \033[1;32mBlock #" << block_1->index << "\033[0;32m - \033[1;32mBlock #" << block_2->index << endl;
+      cout << "Block #" << block_1->index << ":\033[0;32m        " << block_1->this_hash << endl;
+      cout << "\033[1;32mBlock #" << block_2->index << " header:\033[0;32m " << block_2->previous_hash << "\033[0m" << endl;
+      cout << endl;
+      block_1 = block_2;
+    } else {
+      return 1;
+    }
   }
-  // validate();
   return 0;
 }
 
@@ -107,5 +112,9 @@ int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
 
   cout << "\n\033[0;32mBlockchain with \033[1;32m" << this->blockchain_size - 1 << "\033[0;32m blocks imported in ";
   printf("\033[1;32m%.2f seconds.\033[0m\n", (double)(clock() - this->tStart)/CLOCKS_PER_SEC);
-  validate();
+  if (validate() == 0) {
+    cout << "Valid blockchain." << endl;
+  } else {
+    cout << "Invalid blockchain." << endl;
+  }
 }
