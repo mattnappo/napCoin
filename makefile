@@ -12,6 +12,8 @@ else
 endif
 blockchain: main.cpp $(SRC) $(HEADERS)
 	$(CC) main.cpp $(SRC) $(ARGON) $(CFLAGS) $(STD) $(TARGET)
+node: node.cpp
+	$(CC) node.cpp $(STD) -o node.o
 json: json/json.hpp
 	$(CC) json/json.hpp $(CFLAGS) $(STD)
 argon2: argon2/argon2.h
@@ -24,6 +26,6 @@ clean:
 	rm -f *.gch
 	rm -f *.o
 	rm -f *.exe
-	rm -rf a.out.dSYM
+	rm -rf *.dSYM
 	rm -f argon2/*.gch
 	rm -f json/*.gch

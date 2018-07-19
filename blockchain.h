@@ -44,7 +44,7 @@ private:
   Block *head_block = new Block;
   Block *build_genesis();
   Block *next_block(Block *last_block); // Add a block to the list (and the blockchain itself)
-  int validate(); // Validate the blockchain
+  int validate(bool show_blocks); // Validate the blockchain
   Block *genesis();
 public:
   int blockchain_size; // Amount of blocks in the chain

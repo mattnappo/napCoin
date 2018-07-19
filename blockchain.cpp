@@ -61,7 +61,7 @@ int Blockchain::export_blockchain(string blockchain_name) {
   return 0;
 }
 
-int Blockchain::validate() {
+int Blockchain::validate(bool show_blocks) {
   cout << endl << "\033[0;32mStarting validation process.\033[0m" << endl << endl;
 
   Block *block_1 = this->blocks->get_block(0, this->blocks);
@@ -74,15 +74,17 @@ int Blockchain::validate() {
     block_1->this_hash == block_2->previous_hash && 
     block_1->index + 1 == block_2->index) {
       cout << "\033[0;32mValidated: \033[1;32mBlock #" << block_1->index << "\033[0;32m - \033[1;32mBlock #" << block_2->index << endl;
-      cout << "Block #" << block_1->index << ":\033[0;32m        " << block_1->this_hash << endl;
-      cout << "\033[1;32mBlock #" << block_2->index << " header:\033[0;32m " << block_2->previous_hash << "\033[0m" << endl;
-      cout << endl;
+      if (show_blocks) {
+        cout << "Block #" << block_1->index << ":\033[0;32m        " << block_1->this_hash << endl;
+        cout << "\033[1;32mBlock #" << block_2->index << " header:\033[0;32m " << block_2->previous_hash << "\033[0m" << endl;
+      }
       block_1 = block_2;
       block_2 = this->blocks->get_block(block_1->index + 1, this->blocks);
     } else {
       return 1; // failure
     }
   }
+  cout << "\033[0m";
   return 0; // success
 }
 
@@ -109,7 +111,7 @@ int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
 
   cout << "\n\033[0;32mBlockchain with \033[1;32m" << this->blockchain_size - 1 << "\033[0;32m blocks imported in ";
   printf("\033[1;32m%.2f seconds.\033[0m\n", (double)(clock() - this->tStart)/CLOCKS_PER_SEC);
-  if (validate() == 0) {
+  if (validate(false) == 0) {
     cout << "Valid blockchain." << endl;
     return 0;
   } else {
