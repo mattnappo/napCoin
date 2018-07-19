@@ -6,7 +6,18 @@
 #define HASHLEN 32
 #define SALTLEN 16
 using namespace std;
+#include <string.h>
+#include <stdlib.h>
 
+char* strdup (const char* s) {
+  size_t slen = strlen(s);
+  char* result = (char *)malloc(slen + 1);
+  if(result == NULL) {
+    return NULL;
+  }
+  memcpy(result, s, slen+1);
+  return result;
+}
 string hash_block(string contents) {
   string TO_HASH = contents;
   uint8_t hash1[HASHLEN];
