@@ -1,4 +1,5 @@
-SRC = block.cpp list.cpp blockchain.cpp hasher.cpp blockchain.h
+SRC = block.cpp list.cpp blockchain.cpp hasher.cpp
+HEADERS = blockchain.h  argon2/argon2.h
 CFLAGS = -g -Wall
 CC = g++
 STD = -std=c++11
@@ -9,7 +10,7 @@ else
 	ARGON = argon2/libargon2.a
 	TARGET = -o blockchain.o
 endif
-blockchain: main.cpp $(SRC) argon2/argon2.h
+blockchain: main.cpp $(SRC) $(HEADERS)
 	$(CC) main.cpp $(SRC) $(ARGON) $(CFLAGS) $(STD) $(TARGET)
 json: json/json.hpp
 	$(CC) json/json.hpp $(CFLAGS) $(STD)
