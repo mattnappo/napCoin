@@ -4,7 +4,7 @@ CFLAGS = -g -Wall
 CC = g++
 STD = -std=c++11
 ifeq ($(OS),Windows_NT)
-	ARGON = Argon2RefDll.dll
+	ARGON = Argon2OptDll.lib
 	TARGET = -o blockchain.exe
 else
 	ARGON = argon2/libargon2.a
@@ -24,6 +24,6 @@ clean:
 	rm -f *.gch
 	rm -f *.o
 	rm -f *.exe
-	rm -rf a.out.dSYM
+	rm -rf *.dSYM
 	rm -f argon2/*.gch
 	rm -f json/*.gch
