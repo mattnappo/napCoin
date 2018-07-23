@@ -12,6 +12,8 @@ else
 endif
 blockchain: main.cpp $(SRC) $(HEADERS)
 	$(CC) main.cpp $(SRC) $(ARGON) $(CFLAGS) $(STD) $(TARGET)
+node: node.cpp
+	$(CC) node.cpp $(STD) -o node.o
 json: json/json.hpp
 	$(CC) json/json.hpp $(CFLAGS) $(STD)
 argon2: argon2/argon2.h
