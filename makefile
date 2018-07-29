@@ -8,7 +8,7 @@ ifeq ($(OS),Windows_NT)
 	TARGET = -o blockchain.exe
 else
 	ARGON = argon2/libargon2.a
-	TARGET = -o blockchain.o
+	TARGET = -o miner
 endif
 blockchain: main.cpp $(SRC) $(HEADERS)
 	$(CC) main.cpp $(SRC) $(ARGON) $(CFLAGS) $(STD) $(TARGET)

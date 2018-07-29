@@ -53,7 +53,8 @@ int Blockchain::export_blockchain(string blockchain_name) {
     blockchain["blocks"][i]["previous_hash"] = block->previous_hash;
     blockchain["blocks"][i]["hash"] = block->this_hash;
   }
-  string filename = "blockchains/" + blockchain_name + ".json";
+  // string filename = "blockchains/" + blockchain_name + ".json";
+  string filename = blockchain_name + ".json";
   ofstream o(filename);
   o << setw(4) << blockchain << endl;
   o.close();
@@ -89,7 +90,8 @@ int Blockchain::validate(bool show_blocks) {
 }
 
 int Blockchain::import_blockchain(string blockchain_name, bool show_blocks) {
-  string filename = "blockchains/" + blockchain_name + ".json";
+  // string filename = "blockchains/" + blockchain_name + ".json";
+  string filename = blockchain_name + ".json";
   ifstream ifs(filename);
   json blockchain = json::parse(ifs);
   this->blockchain_size = blockchain["blocks"].size();

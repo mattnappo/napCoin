@@ -1,8 +1,7 @@
-# Blockchain
+# The NapCoin Chain
 This is a simple blockchain that uses the [Argon2 hashing algorithm](https://github.com/P-H-C/phc-winner-argon2).
 
 # Usage
-Get up and running using this blockchain!
 
 ## Blockchain class
 Create a new blockchain class:<br>
@@ -85,7 +84,7 @@ int main() {
 
 ## Features to Add:
 * Transactions
-* Proof of work
+<!-- * Proof of work -- >
 * Digital signatures
 * Networking
-* Command line interface
+* A better CLI
