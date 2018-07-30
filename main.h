@@ -19,8 +19,8 @@ public:
   TransactionList();
   ~TransactionList();
   void append(json transaction);
-  json get_transactions();
   json get_transaction(int index);
+  json get_transactions();
   void print_transactions();
 };
 
@@ -55,9 +55,9 @@ class Blockchain {
 public:
   List *blocks = new List; // List of blocks in this chain
   int blockchain_size;
-  Block *new_block(int index, TransactionList *transactions, int proof_of_work, std::string previous_hash);
+  Block *add_block(int index, TransactionList *transactions, int proof_of_work, std::string previous_hash);
   int export_blockchain(std::string blockchain_name); // Export blockchain to json file
-  Block *genesis_block();
+  Block *create_genesis_block();
 };
 
 #endif

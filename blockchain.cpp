@@ -47,13 +47,14 @@ int Block::print_block(bool spacing) {
   return 0;
 }
 
-Block *Blockchain::genesis_block() {
+Block *Blockchain::create_genesis_block() {
     Block *head_block = new Block;
     head_block->init(0, NULL, 9, "0");
+    this->blocks->append(head_block);
     return head_block;
 }
 
-Block *Blockchain::new_block(int index, TransactionList *transactions, int proof_of_work, string previous_hash) {
+Block *Blockchain::add_block(int index, TransactionList *transactions, int proof_of_work, string previous_hash) {
     Block *new_block = new Block;
     new_block->init(index, transactions, proof_of_work, previous_hash);
     this->blocks->append(new_block);

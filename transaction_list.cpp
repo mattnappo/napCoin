@@ -30,16 +30,6 @@ void TransactionList::append(json transaction) {
   }
 }
 
-json TransactionList::get_transactions() {
-  JsonNode *temp_node = this->head;
-  json all_transactions; // this is a json array
-  while (temp_node != NULL) {
-    all_transactions.push_back(temp_node->transaction);
-    temp_node = temp_node->next;
-  }
-  return all_transactions;
-}
-
 json TransactionList::get_transaction(int index) {
   JsonNode *temp_node = this->head;
   int counter = 0;
@@ -51,4 +41,14 @@ json TransactionList::get_transaction(int index) {
     counter++;
   }
   return temp_node->transaction;
+}
+
+json TransactionList::get_transactions() {
+  JsonNode *temp_node = this->head;
+  json all_transactions; // this is a json array
+  while (temp_node != NULL) {
+    all_transactions.push_back(temp_node->transaction);
+    temp_node = temp_node->next;
+  }
+  return all_transactions;
 }
