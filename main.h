@@ -53,11 +53,12 @@ public:
 
 class Blockchain {
 public:
+  Blockchain();
   List *blocks = new List; // List of blocks in this chain
   int blockchain_size;
+  Block *build_genesis();
   Block *add_block(int index, TransactionList *transactions, int proof_of_work, std::string previous_hash);
   int export_blockchain(std::string blockchain_name); // Export blockchain to json file
-  Block *create_genesis_block();
 };
 
 #endif

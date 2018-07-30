@@ -47,10 +47,13 @@ int Block::print_block(bool spacing) {
   return 0;
 }
 
-Block *Blockchain::create_genesis_block() {
+Blockchain::Blockchain() {
+    this->blocks->append(build_genesis()); // Seg faulting on this line
+}
+
+Block *Blockchain::build_genesis() {
     Block *head_block = new Block;
     head_block->init(0, NULL, 9, "0");
-    this->blocks->append(head_block);
     return head_block;
 }
 

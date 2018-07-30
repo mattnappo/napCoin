@@ -1,7 +1,0 @@
-SRC = drive.cpp transactionList.cpp
-HEADERS = linker.h
-FILES = $(SRC) $(HEADERS)
-CFLAGS = std=c++11 -g
-CC = g++
-test.o: $(FILES)
-	$(CC) $(SRC) $(CFLAGS) -o $@

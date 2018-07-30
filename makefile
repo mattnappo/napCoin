@@ -14,6 +14,7 @@ argon2: argon2/argon2.h
 	gcc argon2/argon2.h $(CFLAGS)
 clean:
 	rm -f *.gch
+	rm -f *.out
 	rm -f *.o
 	rm -f *.exe
 	rm -rf *.dSYM

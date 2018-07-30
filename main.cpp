@@ -37,7 +37,6 @@ int main() {
     string _previous_hash = "blockchain->blocks->get_block(0)->this_hash";
     // string _previous_hash = blockchain->blocks->get_block(0)->this_hash;
     
-    // blockchain->create_genesis_block();
     // blockchain->add_block(_index, _transaction_list, _proof_of_work, _previous_hash);
 
     // blockchain->export_blockchain("HEAD.json");
