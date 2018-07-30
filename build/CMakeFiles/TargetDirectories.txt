@@ -1,0 +1,17 @@
+/Users/bolt/git/crow-template/build/CMakeFiles/test.dir
+/Users/bolt/git/crow-template/build/CMakeFiles/rebuild_cache.dir
+/Users/bolt/git/crow-template/build/CMakeFiles/edit_cache.dir
+/Users/bolt/git/crow-template/build/CMakeFiles/amalgamation.dir
+/Users/bolt/git/crow-template/build/src/CMakeFiles/rebuild_cache.dir
+/Users/bolt/git/crow-template/build/src/CMakeFiles/edit_cache.dir
+/Users/bolt/git/crow-template/build/src/CMakeFiles/test.dir
+/Users/bolt/git/crow-template/build/src/CMakeFiles/example.dir
+/Users/bolt/git/crow-template/build/tests/CMakeFiles/rebuild_cache.dir
+/Users/bolt/git/crow-template/build/tests/CMakeFiles/edit_cache.dir
+/Users/bolt/git/crow-template/build/tests/CMakeFiles/test.dir
+/Users/bolt/git/crow-template/build/tests/CMakeFiles/unittest.dir
+/Users/bolt/git/crow-template/build/tests/template/CMakeFiles/rebuild_cache.dir
+/Users/bolt/git/crow-template/build/tests/template/CMakeFiles/edit_cache.dir
+/Users/bolt/git/crow-template/build/tests/template/CMakeFiles/test.dir
+/Users/bolt/git/crow-template/build/tests/template/CMakeFiles/template_test_copy.dir
+/Users/bolt/git/crow-template/build/tests/template/CMakeFiles/mustachetest.dir
