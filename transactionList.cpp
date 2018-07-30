@@ -1,4 +1,4 @@
-#include "linker.h"
+#include "main.h"
 #include "json/json.hpp"
 
 using json = nlohmann::json;
@@ -30,8 +30,8 @@ void TransactionList::append(json transaction) {
   }
 }
 
-json TransactionList::get_transactions(TransactionList *transaction_list) {
-  JsonNode *temp_node = transaction_list->head;
+json TransactionList::get_transactions() {
+  JsonNode *temp_node = this->head;
   json all_transactions; // this is a json array
   while (temp_node != NULL) {
     all_transactions.push_back(temp_node->transaction);
@@ -40,12 +40,8 @@ json TransactionList::get_transactions(TransactionList *transaction_list) {
   return all_transactions;
 }
 
-void TransactionList::print_transactions() {
-
-}
-
-json TransactionList::get_transaction(int index, TransactionList *transaction_list) {
-  JsonNode *temp_node = transaction_list->head;
+json TransactionList::get_transaction(int index) {
+  JsonNode *temp_node = this->head;
   int counter = 0;
   while (temp_node != NULL) {
     if (index == counter) {

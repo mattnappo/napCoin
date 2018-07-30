@@ -1,4 +1,4 @@
-#include "blockchain.h"
+#include "main.h"
 #include <iostream>
 
 List::List() {
@@ -28,8 +28,8 @@ void List::append(Block *block) {
   }
 }
 
-Block *List::get_block(int index, List *list) {
-  Node *temp_node = list->head;
+Block *List::get_block(int index) {
+  Node *temp_node = this->head;
   int counter = 0;
   while (temp_node != NULL) {
     if (index == counter) {

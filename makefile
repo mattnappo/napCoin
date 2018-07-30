@@ -1,5 +1,5 @@
 SRC = block.cpp list.cpp blockchain.cpp hasher.cpp
-HEADERS = blockchain.h argon2/argon2.h
+HEADERS = main.h argon2/argon2.h
 CFLAGS = -g -Wall
 CC = g++
 STD = -std=c++11

@@ -1,35 +1,23 @@
-#include "blockchain.h"
+#include "main.h"
 #include "json/json.hpp"
 #include "argon2/argon2.h"
 #include <iostream>
 
 using namespace std;
 
-string Block::get_timestamp() {
-  time_t t = time(0);
-  tm* now = localtime(&t);
-  string year = to_string((now->tm_year + 1900));
-  string month = to_string((now->tm_mon + 1));
-  string day = to_string(now->tm_mday);
-  string hour = to_string(now->tm_hour);
-  string min = to_string(now->tm_min);
-  string sec = to_string(now->tm_sec);
-  string c_time = year + "-" + month + "-" + day + " @ " + hour + ":" + min + ":" + sec;
-  return c_time;
-}
-
-int Block::init(int index, TransactionList *transactions, string previous_hash, bool from_import, string timestamp, string this_hash) {
+int Block::init(int index, TransactionList *transactions, int proof_of_work, string previous_hash) {
   this->index = index;
   this->transactions = transactions;
+  this->proof_of_work = proof_of_work;
   this->previous_hash = previous_hash;
-  if (from_import) {
-    this->timestamp = timestamp;
-    this->this_hash = this_hash;
-  } else {
-    this->timestamp = get_timestamp();
-    string contents = to_string(this->index) + this->timestamp + this->transactions + this->previous_hash /* + this->this_hash */;
-    this->this_hash = hash_block(contents);
-  }
+  this->timestamp = get_timestamp();
+  
+  json raw = this->transactions->get_transactions();
+  string t_string = raw.dump();
+
+  string contents = to_string(this->index) + this->timestamp + t_string + this->previous_hash;
+  this->this_hash = hash_block(contents);
+
   return 0;
 }
 
