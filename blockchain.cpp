@@ -10,12 +10,14 @@ using namespace std;
 
 Block *Blockchain::genesis_block() {
     Block *head_block = new Block;
-    head_block->init(0, NULL, 9, "0")
+    head_block->init(0, NULL, 9, "0");
     return head_block;
 }
 
-Block Blockchain::new_block() {
-    
+Block *Blockchain::new_block(int index, TransactionList *transactions, int proof_of_work, string previous_hash) {
+    Block *new_block = new Block;
+    new_block->init(index, transactions, proof_of_work, previous_hash);
+    this->blocks->append(new_block);
 }
 
 int Blockchain::export_blockchain(string blockchain_name) {
