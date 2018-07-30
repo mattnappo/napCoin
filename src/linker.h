@@ -2,9 +2,10 @@
 #define LINKER_H
 
 #include "json/json.hpp"
+using json = nlohmann::json;
 
 struct JsonNode {
-  nlohmann::json *transaction;
+  json transaction;
   JsonNode *next;
 };
 
@@ -14,8 +15,9 @@ public:
   JsonNode *tail;
   TransactionList();
   ~TransactionList();
-  void append(nlohmann::json *transaction);
-  nlohmann::json *get_transaction(int index, TransactionList *transaction_list);
+  void append(json transaction);
+  json get_transaction(int index, TransactionList *transaction_list);
+  void print_transactions();
 };
 
 #endif

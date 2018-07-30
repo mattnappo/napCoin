@@ -16,9 +16,9 @@ TransactionList::~TransactionList() {
   }
 }
 
-void TransactionList::append(json *transactions) {
+void TransactionList::append(json transaction) {
   JsonNode *temp = new JsonNode;
-  temp->transactions = transactions;
+  temp->transaction = transaction;
   temp->next = NULL;
   if (head == NULL) {
     this->head = temp;
@@ -30,8 +30,12 @@ void TransactionList::append(json *transactions) {
   }
 }
 
-json *List::get_transaction(int index, TransactionList *transaction_list) {
-  JsonNode *temp_node = list->head;
+void TransactionList::print_transactions() {
+
+}
+
+json TransactionList::get_transaction(int index, TransactionList *transaction_list) {
+  JsonNode *temp_node = transaction_list->head;
   int counter = 0;
   while (temp_node != NULL) {
     if (index == counter) {
