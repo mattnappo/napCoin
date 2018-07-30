@@ -5,21 +5,19 @@
 #include <list>
 #include <time.h>
 
-using namespace std;
-
-string hash_block(string contents); // Method that hashes the contents of each block
+std::string hash_block(std::string contents); // Method that hashes the contents of each block
 
 class Block {
 private:
-  string get_timestamp(); // Method that returns a string of the current date and time
+  std::string get_timestamp(); // Method that returns a std::string of the current date and time
 public:  
-  string this_hash; // Hash of the current block
+  std::string this_hash; // Hash of the current block
   int index; // Index of the current block
-  string timestamp; // Timestamp of the current block
-	string data; // Data of the current block
-  string previous_hash; // Hash of the previous block
-  int init(int index, string data, string previous_hash,
-    bool from_import = false, string timestamp = "", string this_hash = ""); // Initialize a block
+  std::string timestamp; // Timestamp of the current block
+	std::string data; // Data of the current block
+  std::string previous_hash; // Hash of the previous block
+  int init(int index, std::string data, std::string previous_hash,
+    bool from_import = false, std::string timestamp = "", std::string this_hash = ""); // Initialize a block
   int print_block(bool spacing); // Print the contents of the current block
 };
 
@@ -50,8 +48,8 @@ public:
   int blockchain_size; // Amount of blocks in the chain
   List *blocks = new List; // List of blocks in this chain
   int build(int blockchain_size, bool show_blocks); // Build blocks
-  int export_blockchain(string blockchain_name); // Export blockchain to json file
-  int import_blockchain(string blockchain_name, bool show_blocks); // Import blockchain from json file
+  int export_blockchain(std::string blockchain_name); // Export blockchain to json file
+  int import_blockchain(std::string blockchain_name, bool show_blocks); // Import blockchain from json file
 };
 
 #endif
