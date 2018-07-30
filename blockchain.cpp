@@ -49,7 +49,7 @@ int Blockchain::export_blockchain(string blockchain_name) {
     Block *block = this->blocks->get_block(i, this->blocks);
     blockchain["blocks"][i]["index"] = block->index;
     blockchain["blocks"][i]["timestamp"] = block->timestamp;
-    blockchain["blocks"][i]["data"] = block->data;
+    blockchain["blocks"][i]["transactions"] = block->transactions->get_transactions(block->transactions);
     blockchain["blocks"][i]["previous_hash"] = block->previous_hash;
     blockchain["blocks"][i]["hash"] = block->this_hash;
   }
@@ -70,7 +70,9 @@ int Blockchain::validate(bool show_blocks) {
   Block *block_2 = this->blocks->get_block(block_1->index + 1, this->blocks);
   // cout << block_2->index << endl;
   for (int i = 0; i < blockchain_size - 2; i++) {
-    string contents = to_string(block_1->index) + block_1->timestamp + block_1->data + block_1->previous_hash;
+    // make function to return all transactions as one long string
+
+    string contents = to_string(block_1->index) + block_1->timestamp + block_1->transactions->get_transactions(block_1->transactions) + block_1->previous_hash;
     if (block_1->this_hash == hash_block(contents) && 
     block_1->this_hash == block_2->previous_hash && 
     block_1->index + 1 == block_2->index) {

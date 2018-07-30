@@ -1,11 +1,32 @@
 #ifndef BLOCKCHAIN_H
 #define BLOCKCHAIN_H
 
-#include <string>
-#include <list>
+// #include <string>
+// #include <list>
 #include <time.h>
+#include "json/json.hpp"
+using json = nlohmann::json;
 
 std::string hash_block(std::string contents); // Method that hashes the contents of each block
+
+// Add list templating eventually
+
+struct JsonNode {
+  json transaction;
+  JsonNode *next;
+};
+
+class TransactionList {
+public:
+  JsonNode *head;
+  JsonNode *tail;
+  TransactionList();
+  ~TransactionList();
+  void append(json transaction);
+  json get_transaction(int index, TransactionList *transaction_list);
+  json get_transactions(TransactionList *transaction_list);
+  void print_transactions();
+};
 
 class Block {
 private:
@@ -14,9 +35,9 @@ public:
   std::string this_hash; // Hash of the current block
   int index; // Index of the current block
   std::string timestamp; // Timestamp of the current block
-	std::string data; // Data of the current block
+	TransactionsList transactions; // List of transactions in the current block
   std::string previous_hash; // Hash of the previous block
-  int init(int index, std::string data, std::string previous_hash,
+  int init(int index, TransactionList *transactions, std::string previous_hash,
     bool from_import = false, std::string timestamp = "", std::string this_hash = ""); // Initialize a block
   int print_block(bool spacing); // Print the contents of the current block
 };
