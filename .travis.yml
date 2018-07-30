@@ -1,27 +1,27 @@
-matrix:
-  include:
-    - os: linux
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
-      language: cpp
-      script:
-        - make blockchain
-        - make json
+# matrix:
+#   include:
+#     - os: linux
+#       addons:
+#         apt:
+#           sources:
+#             - ubuntu-toolchain-r-test
+#           packages:
+#             - g++-6
+#       env:
+#          - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+#       language: cpp
+#       script:
+#         - make blockchain
+#         - make json
 
-    - language: c
-      compiler: gcc
-      script:
-        - make argon2
+#     - language: c
+#       compiler: gcc
+#       script:
+#         - make argon2
 
-before_install:
-    - eval "${MATRIX_EVAL}"
-notifications:
-  email:
-    on_success: never
-    on_failure: never
+# before_install:
+#     - eval "${MATRIX_EVAL}"
+# notifications:
+#   email:
+#     on_success: never
+#     on_failure: never

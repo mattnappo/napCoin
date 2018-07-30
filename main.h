@@ -32,7 +32,7 @@ public:
 	TransactionList *transactions; // List of transactions in the current block
   std::string previous_hash; // Hash of the previous block
   int proof_of_work;
-  int init(int index, TransactionList *transactions, int proof_of_work, string previous_hash); // Initialize a new block
+  int init(int index, TransactionList *transactions, int proof_of_work, std::string previous_hash); // Initialize a new block
   int print_block(bool spacing); // Print the contents of the current block
 };
 
@@ -55,7 +55,7 @@ class Blockchain {
 public:
   List *blocks = new List; // List of blocks in this chain
   int blockchain_size;
-  Block *new_block(int index, TransactionList *transactions, int proof_of_work, string previous_hash);
+  Block *new_block(int index, TransactionList *transactions, int proof_of_work, std::string previous_hash);
   int export_blockchain(std::string blockchain_name); // Export blockchain to json file
   Block *genesis_block();
 };

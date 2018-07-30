@@ -1,19 +1,13 @@
-SRC = block.cpp list.cpp blockchain.cpp hasher.cpp
+SRC = list.cpp blockchain.cpp hasher.cpp
 HEADERS = main.h argon2/argon2.h
 CFLAGS = -g -Wall
 CC = g++
 STD = -std=c++11
-ifeq ($(OS),Windows_NT)
-	ARGON = Argon2OptDll.lib
-	TARGET = -o blockchain.exe
-else
-	ARGON = argon2/libargon2.a
-	TARGET = -o blockchain.o
-endif
-blockchain: main.cpp $(SRC) $(HEADERS)
-	$(CC) main.cpp $(SRC) $(ARGON) $(CFLAGS) $(STD) $(TARGET)
+THREADING = -lboost_thread-mt -lboost_system-mt -pthread
+blockchain: $(SRC) $(HEADERS)
+	$(CC) $(SRC) $(ARGON) $(CFLAGS) $(STD) $(TARGET)
 node: node.cpp
-	$(CC) node.cpp $(STD) -o node.o
+	$(CC) node.cpp -03 $(STD) $(THREADING) -o $@
 json: json/json.hpp
 	$(CC) json/json.hpp $(CFLAGS) $(STD)
 argon2: argon2/argon2.h
