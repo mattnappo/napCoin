@@ -48,7 +48,7 @@ int Block::print_block(bool spacing) {
 }
 
 Blockchain::Blockchain() {
-    this->blocks->append(build_genesis()); // Seg faulting on this line
+    // this->blocks->append(build_genesis()); // Seg faulting on this line
 }
 
 Block *Blockchain::build_genesis() {
