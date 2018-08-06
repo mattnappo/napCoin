@@ -1,45 +1,58 @@
 # The NapCoin Chain
+
 This is a simple blockchain that uses the [Argon2 hashing algorithm](https://github.com/P-H-C/phc-winner-argon2).
 
-# Usage
+## Usage
 
-## Blockchain class
-Create a new blockchain class:<br>
-``Blockchain *blockchain = new Blockchain;``<br>
+### Blockchain class
 
-### Methods
+Create a new blockchain class:
+``Blockchain *blockchain = new Blockchain;``
+
+#### Methods
+
 Methods of the blockchain class.
 
-### build
+#### build
+
 ``build`` builds a specified amount of blocks onto the blockchain.
 Arguments:
+
 * ``int blockchain_size`` - Specifies the amount of blocks to build onto the blockchain.
 * ``bool show_blocks`` - Specifies whether to display the contents of each newly-created block to the console.
 
-### export_blockchain
+#### export_blockchain
+
 ``export_blockchain`` exports the current blockchain into a json file in the 'blockchains' subdirectory.
 Arguments:
+
 * ``string blockchain_name`` - Specifies the name of the file to write the current blockchain to.
 
-### import_blockchain
+#### import_blockchain
+
 ``import_blockchain`` imports a blockchain from a json file in the 'blockchains' subdirectory.
 Arguments:
+
 * ``string blockchain_name`` - Specifies the name of the file to read the blockchain from.
 * ``bool show_blocks`` - Specifies whether to display the contents of each newly-imported block to the console.
 
-### validate
+#### validate
+
 ``validate`` validates the blocks of the current blockchain.
 Arguments: (None)
 
-### print_blockchain
+#### print_blockchain
+
 ``print_blockchain`` prints the blockchain in its current state.
 Arguments: (None)
 
-## Example code
+### Example code
+
 Some examples to get started
 
-### Build and export
-```
+#### Build and export
+
+```C++
 #include "blockchain.hpp"
 
 int main() {
@@ -56,25 +69,28 @@ int main() {
 }
 ```
 
-### Import and print
+#### Import and print
+
+```C++
+  #include "blockchain.hpp"
+
+  int main() {
+    // Create a new blockchain class
+    Blockchain *blockchain = new Blockchain;
+
+    // Import the blockchain from "blockchains/blockchain_0.json" to the blockchain object and print the new blockchain.
+    blockchain->import_blockchain("blockchain_0", true);
+
+    return 0;
+  }
 ```
-#include "blockchain.hpp"
 
-int main() {
-  // Create a new blockchain class
-  Blockchain *blockchain = new Blockchain;
+### Building
 
-  // Import the blockchain from "blockchains/blockchain_0.json" to the blockchain object and print the new blockchain.
-  blockchain->import_blockchain("blockchain_0", true);
-
-  return 0;
-}
-
-```
-## Building
 ``make blockchain`` builds ``blockchain.cpp`` as ``blockchain.o`` in the root directory.
 
-## Finished Features:
+### Finished Features
+
 * Import function
 * Export function
 * Validation
@@ -82,9 +98,10 @@ int main() {
 * Fixed security flaws
 * Lua blockchain for Minecraft (Sorta a meme)
 
-## Features to Add:
+### Features to Add
+
 * Transactions
-<!-- * Proof of work -- >
+* Proof of work
 * Digital signatures
 * Networking
 * A better CLI
