@@ -1,19 +1,11 @@
-sudo: false
+# Enable C++ support
 language: cpp
+# Compiler selection
 compiler:
-  - gcc
   - clang
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    - llvm-toolchain-precise-3.8
-    packages:
-    - g++-5
-    - clang-3.8
-install:
-- "[ $CXX = g++ ] && export CXX=g++-5 || true"
-- "[ $CXX = clang++ ] && export CXX=clang++-3.8 || true"
+  - gcc
+# Build steps
 script:
-  - make
-  - make test
+  - mkdir build
+  - cd build
+  - cmake .. && make
