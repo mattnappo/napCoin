@@ -1,5 +1,5 @@
-#ifndef BLOCKCHAIN_H
-#define BLOCKCHAIN_H
+#ifndef NAPCOIN_H
+#define NAPCOIN_H
 
 #include "json/json.hpp"
 using json = nlohmann::json;

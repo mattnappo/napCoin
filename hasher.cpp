@@ -1,4 +1,4 @@
-#include "main.h"
+#include "napcoin.h"
 #include "json/json.hpp"
 #include "argon2/argon2.h"
 #include <string>

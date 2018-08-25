@@ -1,4 +1,4 @@
-#include "main.h"
+#include "napcoin.h"
 #include "json/json.hpp"
 
 using json = nlohmann::json;

@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 
-#include "main.h"
+#include "napcoin.h"
 #include "crow_all.h"
 
 // curl "localhost:8080/transaction" -H "Content-Type: application/json" -d '{"from": "akjflw", "to":"fjlakdj", "amount": 3}'

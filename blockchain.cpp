@@ -1,4 +1,4 @@
-#include "main.h"
+#include "napcoin.h"
 #include <string>
 #include <fstream>
 #include <iostream>
